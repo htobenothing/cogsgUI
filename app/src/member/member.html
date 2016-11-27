@@ -1,0 +1,54 @@
+<div id="wrapper">
+	<sidebar></sidebar>
+	<div id="page-wrapper">
+		<div ng-controller="MemberController as memberCtrl">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Members</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<div><button type="button" class="btn btn-primary" ng-click="memberCtrl.showInfoTemplate()">Add Member</button></div>
+			<br>
+			<div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">Name</span>
+							<input type="text" class="form-control" placeholder="Search by Name" aria-describedby="basic-addon1" ng-model="queryString">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				
+				<table class="table">
+					<!--<caption>Member List</caption>-->
+					<thead class="thead-inverse">
+						<tr>
+							<th><input type="checkbox"></th>
+							<th>#</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Create Date</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="member in memberCtrl.members|filter:queryString">
+						<td><input type="checkbox"></td>
+						<th scope="row">{{$index+1}}</th>
+						<td>{{member.Name}}</td>
+						<td>{{member.Phone}}</td>
+						<td>{{member.Create_Date|date:'MM/dd/yyyy'}}</td>
+						<td>{{member.Status}}</td>
+						<td>
+							<button type="button" class="btn btn-primary" ng-click="memberCtrl.viewMember(member)">Edit</button>
+							<button type="button" class="btn btn-danger" ng-click="memberCtrl.inactiveMember(member)">Delete</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!--<memberdetail viewMember="memberCtrl.viewMember"></memberdetail>-->
+		</div>
+	</div>
+</div>

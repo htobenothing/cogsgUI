@@ -1,0 +1,79 @@
+<div id="wrapper">
+	<sidebar></sidebar>
+	<div id="page-wrapper">
+		<div ng-controller="AttendController as $ctrl">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Attendance</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="$ctrl.showDistrictAttendance()">Add New</button>
+			<div>
+				<form method="post">
+					<div ng-if="$ctrl.showAttendlist">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<th>#</th>
+								<th>Name(姓名)</th>
+								<th>Lords Table(主日)</th>
+								<th>Morning Revival(晨兴)</th>
+								<th>Prayer Meeting (祷告聚会)</th>
+								<th>Bible Reading(读经)</th>
+								<th>Small Group Meeting(小排)</th>
+								<th></th>
+							</thead>
+							<tr ng-repeat="member in $ctrl.members">
+								<td>{{$index}}</td>
+								<td>
+									{{ member.Name }}
+								</td>
+								<td>
+									<input type="checkbox" ng-model="member.attend.Lords_Table" ng-disabled="member.isReadOnly">
+								</td>
+								<td>
+									<input type="checkbox" ng-model="member.attend.Morning_Revival" ng-disabled="member.isReadOnly">
+								</td>
+								<td>
+									<input type="checkbox" ng-model="member.attend.Prayer_Meeting" ng-disabled="member.isReadOnly">
+								</td>
+								<td>
+									<input type="checkbox" ng-model="member.attend.Bible_Reading" ng-disabled="member.isReadOnly">
+								</td>
+								<td>
+									<input type="checkbox" ng-model="member.attend.Small_Group" ng-disabled="member.isReadOnly">
+								</td>
+								<td>
+									<button type="button" class="btn btn-primary" ng-click="$ctrl.confirmAttend(member)" ng-if="!member.isSubmit"> Confirm </button>
+									<div ng-if="member.isSubmit">
+										<button type="button" class="btn btn-primary" ng-click="member.isReadOnly = false" ng-if="member.isReadOnly">Edit </button>
+										<button type="button" class="btn btn-primary" ng-click="$ctrl.confirmAttend(member)" ng-if="!member.isReadOnly ">Update </button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="8">
+									<div class="input-group">
+										<span class="input-group-addon" id="basic-addon1">Children</span>
+										<input type="text" class="form-control" placeholder="Children Number" ng-model="$ctrl.Children" aria-describedby="basic-addon1">
+									</div>
+								</td>
+							</tr>
+						</table>
+						<button type="button" class="btn btn-primary">Confirm All</button>
+						<button type="button" class="btn btn-primary" ng-click="$ctrl.showStatics()">Show Static</button>
+						<div ng-if="$ctrl.isShowStatic">
+							<h3>Statistic</h3>
+							<div>Lords_Table:{{$ctrl.statics.Lords_Table}}</div>
+							<div>Prayer_Meeting:{{$ctrl.statics.Prayer_Meeting}}</div>
+							<div>Morning_Revival: {{$ctrl.statics.Morning_Revival}}</div>
+							<div>Bible_Reading:{{$ctrl.statics.Bible_Reading}}</div>
+							<div>Small_Group: {{$ctrl.statics.Small_Group}}</div>
+							<div>Children: {{$ctrl.statics.Children}}</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

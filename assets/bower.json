@@ -1,0 +1,39 @@
+{
+  "name": "cogsgui",
+  "authors": [
+    "htobenothing <htobenothing@gmail.com>"
+  ],
+  "description": "Church Of God In Singapore",
+  "main": "",
+  "keywords": [
+    "Church",
+    "God"
+  ],
+  "dependencies": {
+    "jquery": null,
+    "angularjs": null,
+    "angular-ui-router": null,
+    "angular-jwt":null,
+    "materialize":null,
+    "angular-permission":null,
+    "angular-cookies":null,
+    "angular-bootstrap":null,
+    "bootstrap":null,
+    "angular-material":null,
+    "angular-animate":null,
+    "angular-touch":null,
+    "angular-smart-table":null,
+    "ng-table":null
+   
+  },
+  "license": "MIT",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

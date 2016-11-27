@@ -1,0 +1,7 @@
+table{
+	margin:10px 0 0;
+}
+
+table input[type='checkbox'] {
+    zoom: 2
+}
