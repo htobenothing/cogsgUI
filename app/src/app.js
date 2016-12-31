@@ -16,7 +16,7 @@
 		// 	editor: 'editor',
 		// 	guest: 'guest'
 		// })
-		.constant('ApiBasePath', 'http://192.168.0.197:8001')
+		.constant('ApiBasePath', 'http://0.0.0.0:8001')
 		.config(CSRFConfig)
 		.run(AuthenRedirect)
 

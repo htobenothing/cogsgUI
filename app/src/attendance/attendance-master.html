@@ -11,11 +11,24 @@
 			<button type="button" class="btn btn-primary" ng-click="$ctrl.showDistrictAttendance()">Add New</button>
 			<div>
 				<form method="post">
+					<br>
 					<div ng-if="$ctrl.showAttendlist">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">Name</span>
+									<input type="text" class="form-control" placeholder="Search by Name" aria-describedby="basic-addon1" ng-model="queryString">
+								</div>
+							</div>
+						</div>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<th>#</th>
-								<th>Name(姓名)</th>
+								<th><span ng-click="sortType = 'name'; sortReverse= !sortReverse">Name(姓名)
+									<span ng-show="sortType='name' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+									<span ng-show="sortType='name' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+									</span>
+								</th>
 								<th>Lords Table(主日)</th>
 								<th>Morning Revival(晨兴)</th>
 								<th>Prayer Meeting (祷告聚会)</th>
@@ -23,7 +36,7 @@
 								<th>Small Group Meeting(小排)</th>
 								<th></th>
 							</thead>
-							<tr ng-repeat="member in $ctrl.members">
+							<tr ng-repeat="member in $ctrl.members |filter:queryString | orderBy:sortType:sortReverse">
 								<td>{{$index}}</td>
 								<td>
 									{{ member.Name }}
