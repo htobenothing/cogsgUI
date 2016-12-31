@@ -63,6 +63,7 @@
 
 						var promise = AttendanceService.createAttendance(attend)
 						promise.then(function (resp) {
+
 								$log.info("Attandance create Success")
 								data.newAttend = resp.data;
 								$log.info(data.newAttend)
