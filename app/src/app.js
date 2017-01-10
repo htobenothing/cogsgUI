@@ -1,7 +1,7 @@
 (function () {
 	'use strict'
 
-	angular.module('myApp', ['ui.router', 'ngCookies', 'angular-jwt', 'ui.bootstrap', 'ngMaterial'])
+	angular.module('myApp', ['ui.router', 'ngCookies', 'angular-jwt', 'ui.bootstrap', 'ngMaterial','fixed.table.header'])
 		// .constant('AUTH_EVENTS', {
 		// 	loginSuccess: 'auth-login-success',
 		// 	loginFailed: 'auth-login-failed',
@@ -16,6 +16,7 @@
 		// 	editor: 'editor',
 		// 	guest: 'guest'
 		// })
+		// .constant('ApiBasePath', 'http://192.168.0.197:8001')
 		.constant('ApiBasePath', 'http://0.0.0.0:8001')
 		.config(CSRFConfig)
 		.run(AuthenRedirect)

@@ -4,8 +4,9 @@
 	angular.module('myApp')
 		.component('attendanceComponent', {
 			templateUrl: "app/src/attendance/attandance-master.html",
-			bindings:{
-				statics:"<"
+			bindings: {
+				statics: "<",
+				members:"<"
 			}
 
 		})
@@ -24,10 +25,10 @@
 			})
 			return response;
 		}
-		service.getWeeklyAttends = function(){
+		service.getWeeklyAttends = function () {
 			var response = $http({
-				url:(ApiBasePath+"/api/attends/"),
-				method:"GET"
+				url: (ApiBasePath + "/api/attends/"),
+				method: "GET"
 			})
 			return response;
 		}
@@ -52,71 +53,90 @@
 
 	}
 
-	AttendController.$inject = ["AttendanceService", "$log", "MemberService"]
+	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window"]
 
-	function AttendController(AttendanceService, $log, MemberService) {
+	function AttendController(AttendanceService, $log, MemberService, $window) {
 		var $ctrl = this;
 
 
 		$ctrl.confirmAttend = function (data) {
 
-				$log.info(data)
-				if (!data.isSubmit) {
-					if (data.attend) {
-						$log.info("create attendance...")
-						let attend = data.attend;
-						attend.Member_ID = data.Member_ID
-
-						var promise = AttendanceService.createAttendance(attend)
-						promise.then(function (resp) {
-
-								$log.info("Attandance create Success")
-								data.newAttend = resp.data;
-								$log.info(data.newAttend)
-								data.isReadOnly = true;
-								data.isSubmit = true;
-							})
-							.catch(function (err) {
-								$log.info(err)
-							})
-					}
-				} else {
-					$log.info("Updating attendance...")
+			$log.info(data)
+			if (!data.isSubmit) {
+				if (data.attend) {
 					let attend = data.attend;
-					let newAttend = data.newAttend;
-					// update data 
-					newAttend.Bible_Reading = attend.Bible_Reading
-					newAttend.Lords_Table = attend.Lords_Table
-					newAttend.Morning_Revival = attend.Morning_Revival
-					newAttend.Prayer_Meeting = attend.Prayer_Meeting
-					newAttend.Small_Group = attend.Small_Group
-					$log.info(newAttend)
-					var promise = AttendanceService.updateAttendance(newAttend);
+					$log.info("create attendance...")
+					attend.Member_ID = data.Member_ID
+
+					var promise = AttendanceService.createAttendance(attend)
 					promise.then(function (resp) {
-							$log.info("Update Success...")
-							data.newAttend = resp.data
+
+							$log.info("Attandance create Success")
+							data.newAttend = resp.data;
 							$log.info(data.newAttend)
 							data.isReadOnly = true;
+							data.isSubmit = true;
+
+							$window.sessionStorage.WeeklyAttends = JSON.stringify($ctrl.members);
 						})
 						.catch(function (err) {
 							$log.info(err)
 						})
 				}
-
-				// $log.log("All members:",$ctrl.members)
+			} else {
+				$log.info("Updating attendance...")
+				let attend = data.attend;
+				let newAttend = data.newAttend;
+				// update data 
+				newAttend.Bible_Reading = attend.Bible_Reading
+				newAttend.Lords_Table = attend.Lords_Table
+				newAttend.Morning_Revival = attend.Morning_Revival
+				newAttend.Prayer_Meeting = attend.Prayer_Meeting
+				newAttend.Small_Group = attend.Small_Group
+				$log.info(newAttend)
+				var promise = AttendanceService.updateAttendance(newAttend);
+				promise.then(function (resp) {
+						$log.info("Update Success...")
+						data.newAttend = resp.data
+						$log.info(data.newAttend)
+						data.isReadOnly = true;
+						$window.sessionStorage.WeeklyAttends = JSON.stringify($ctrl.members);
+					})
+					.catch(function (err) {
+						$log.info(err)
+					})
 			}
+
+			$log.log("All members:", $ctrl.members)
+
+			
+			// $log.info('Session',JSON.parse($window.sessionStorage.WeeklyAttends))
+
+		}
 
 
 		$ctrl.showDistrictAttendance = function () {
-			var promise = MemberService.getAllActiveMembers();
-			promise.then(function (resp) {
-					$ctrl.members = resp.data;
-					// $log.info($ctrl.members)
-				})
-				.catch(function (err) {
-					$log.info(err)
-				})
-			$ctrl.showAttendlist = !$ctrl.showAttendlist;
+
+
+			if (!$window.sessionStorage.WeeklyAttends) {
+				$log.info('New attendance ...')
+				var promise = MemberService.getAllActiveMembers();
+				promise.then(function (resp) {
+						$ctrl.members = resp.data;
+						$log.info('init data',$ctrl.members)
+					})
+					.catch(function (err) {
+						$log.info(err)
+					})
+				$ctrl.showAttendlist = !$ctrl.showAttendlist;
+			} else {
+				let WeeklyAttends = JSON.parse($window.sessionStorage.WeeklyAttends);
+
+				$log.info(WeeklyAttends)
+				$ctrl.members = WeeklyAttends;
+				
+			}
+
 
 		}
 
@@ -155,6 +175,8 @@
 			$log.info($ctrl.statics)
 		}
 
+
+		$ctrl.showDistrictAttendance();
 
 
 	}

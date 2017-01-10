@@ -23,7 +23,8 @@
     "angular-animate":null,
     "angular-touch":null,
     "angular-smart-table":null,
-    "ng-table":null
+    "ng-table":null,
+    "angular-fixed-table-header":null
    
   },
   "license": "MIT",

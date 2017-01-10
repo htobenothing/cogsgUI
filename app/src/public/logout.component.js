@@ -11,6 +11,7 @@
 
 	function LogoutController($http,$window,$state) {
 		delete $window.sessionStorage.token;
+		delete $window.sessionStorage.WeeklyAttends;
 		$http.defaults.headers.common.Authorization = '';
 		$state.go('login')
 	}	

@@ -8,7 +8,7 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<button type="button" class="btn btn-primary" ng-click="$ctrl.showDistrictAttendance()">Create Attendance</button>
+			<!--<button type="button" class="btn btn-primary" ng-click="$ctrl.showDistrictAttendance()">Create Attendance</button>-->
 			<div>
 				<form method="post">
 					<br>
@@ -21,9 +21,9 @@
 								</div>
 							</div>
 						</div>
-						<div style="overflow: auto; max-height: 500px;">
+					
 							<table class="table table-bordered table-striped">
-								<thead fix-head>
+								<thead >
 									<tr>
 										<th>#</th>
 										<th><span ng-click="sortType = 'name'; sortReverse= !sortReverse">Name(姓名)
@@ -78,7 +78,7 @@
 									</td>
 								</tr>
 							</table>
-						</div>
+				
 						<button type="button" class="btn btn-primary">Confirm All</button>
 						<button type="button" class="btn btn-primary" ng-click="$ctrl.showStatics()">Show Static</button>
 						<div ng-if="$ctrl.isShowStatic">
@@ -90,6 +90,7 @@
 							<div>Small_Group: {{$ctrl.statics.Small_Group}}</div>
 							<div>Children: {{$ctrl.statics.Children}}</div>
 						</div>
+
 					</div>
 				</form>
 			</div>
