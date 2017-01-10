@@ -24,7 +24,13 @@
 			})
 			return response;
 		}
-
+		service.getWeeklyAttends = function(){
+			var response = $http({
+				url:(ApiBasePath+"/api/attends/"),
+				method:"GET"
+			})
+			return response;
+		}
 		service.createAttendance = function (data) {
 			var response = $http({
 				url: (ApiBasePath + "/api/attends/"),

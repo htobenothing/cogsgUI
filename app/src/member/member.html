@@ -26,7 +26,7 @@
 					<!--<caption>Member List</caption>-->
 					<thead class="thead-inverse">
 						<tr>
-							<th><input type="checkbox"></th>
+							
 							<th>#</th>
 							<th>Name</th>
 							<th>Phone</th>
@@ -35,7 +35,7 @@
 						</tr>
 					</thead>
 					<tr ng-repeat="member in memberCtrl.members|filter:queryString">
-						<td><input type="checkbox"></td>
+						
 						<th scope="row">{{$index+1}}</th>
 						<td>{{member.Name}}</td>
 						<td>{{member.Phone}}</td>
