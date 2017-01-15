@@ -128,12 +128,13 @@
 					.catch(function (err) {
 						$log.info(err)
 					})
-				$ctrl.showAttendlist = !$ctrl.showAttendlist;
+				$ctrl.showAttendlist = true;
 			} else {
 				let WeeklyAttends = JSON.parse($window.sessionStorage.WeeklyAttends);
-
-				$log.info(WeeklyAttends)
+				$ctrl.showAttendlist = true;
+				
 				$ctrl.members = WeeklyAttends;
+				$log.info("in show District attendance",$ctrl.members)
 				
 			}
 
