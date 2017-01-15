@@ -1,7 +1,7 @@
 (function () {
 	'use strict'
 
-	angular.module('myApp', ['ui.router', 'ngCookies', 'angular-jwt', 'ui.bootstrap', 'ngMaterial','fixed.table.header'])
+	angular.module('myApp', ['ui.router', 'ngCookies', 'angular-jwt', 'ui.bootstrap', 'ngMaterial'])
 		// .constant('AUTH_EVENTS', {
 		// 	loginSuccess: 'auth-login-success',
 		// 	loginFailed: 'auth-login-failed',
