@@ -1,6 +1,6 @@
 <div id="wrapper">
 	<sidebar></sidebar>
-	<div id="page-wrapper">
+	<div id="page-wrapper" >
 		<div ng-controller="AttendController as $ctrl">
 			<div class="row">
 				<div class="col-lg-12">
@@ -21,22 +21,24 @@
 								</div>
 							</div>
 						</div>
-					
-							<table class="table table-bordered table-striped" id="entriestable">
+						<div class="row" >
+							<div id="header-fixed" class="table table-bordered table-striped"></div>
+							<table class="table table-bordered table-striped" id="attendTable" style="width:100%">
 								<thead >
 									<tr>
-										<th>#</th>
-										<th><span ng-click="sortType = 'name'; sortReverse= !sortReverse">Name(姓名)
-									<span ng-show="sortType='name' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+										<th style="width:9%">#</th>
+										<th style="width:13%">
+											<span ng-click="sortType = 'name'; sortReverse= !sortReverse">Name(姓名)
+											<span ng-show="sortType='name' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
 											<span ng-show="sortType='name' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
 											</span>
 										</th>
-										<th>Lords Table(主日)</th>
-										<th>Morning Revival(晨兴)</th>
-										<th>Prayer Meeting (祷告聚会)</th>
-										<th>Bible Reading(读经)</th>
-										<th>Small Group Meeting(小排)</th>
-										<th></th>
+										<th style="width:13%">Lords Table(主日)</th>
+										<th style="width:13%">Morning Revival(晨兴)</th>
+										<th style="width:13%">Prayer Meeting (祷告聚会)</th>
+										<th style="width:13%">Bible Reading(读经)</th>
+										<th style="width:13%">Small Group Meeting(小排)</th>
+										<th style="width:13%">Remarks</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -78,7 +80,11 @@
 									</td>
 								</tr>
 							</table>
-				
+							
+								
+							
+							
+						</div>
 						<button type="button" class="btn btn-primary">Confirm All</button>
 						<button type="button" class="btn btn-primary" ng-click="$ctrl.showStatics()">Show Static</button>
 						<div ng-if="$ctrl.isShowStatic">
@@ -90,10 +96,10 @@
 							<div>Small_Group: {{$ctrl.statics.Small_Group}}</div>
 							<div>Children: {{$ctrl.statics.Children}}</div>
 						</div>
-
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<script src="assets/js/fixhead.js"></script>

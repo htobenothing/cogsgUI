@@ -6,7 +6,7 @@
 			templateUrl: "app/src/attendance/attandance-master.html",
 			bindings: {
 				statics: "<",
-				members:"<"
+				members: "<"
 			}
 
 		})
@@ -55,8 +55,10 @@
 
 	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window"]
 
-	function AttendController(AttendanceService, $log, MemberService, $window) {
+	function AttendController(AttendanceService, $log, MemberService, $window, $timeout) {
 		var $ctrl = this;
+
+
 
 
 		$ctrl.confirmAttend = function (data) {
@@ -109,7 +111,7 @@
 
 			$log.log("All members:", $ctrl.members)
 
-			
+
 			// $log.info('Session',JSON.parse($window.sessionStorage.WeeklyAttends))
 
 		}
@@ -123,7 +125,7 @@
 				var promise = MemberService.getAllActiveMembers();
 				promise.then(function (resp) {
 						$ctrl.members = resp.data;
-						$log.info('init data',$ctrl.members)
+						$log.info('init data', $ctrl.members)
 					})
 					.catch(function (err) {
 						$log.info(err)
@@ -132,10 +134,10 @@
 			} else {
 				let WeeklyAttends = JSON.parse($window.sessionStorage.WeeklyAttends);
 				$ctrl.showAttendlist = true;
-				
+
 				$ctrl.members = WeeklyAttends;
-				$log.info("in show District attendance",$ctrl.members)
-				
+				$log.info("in show District attendance", $ctrl.members)
+
 			}
 
 
@@ -178,7 +180,8 @@
 
 
 		$ctrl.showDistrictAttendance();
-
+		// $timeout($ctrl.onLoad())
+		// $ctrl.onLoad();
 
 	}
 

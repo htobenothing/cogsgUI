@@ -50,10 +50,10 @@
 			url:"/attend",
 			templateUrl:"app/src/attendance/attendance-master.html"
 		})
-		.state('statics',{
-			url:"/statics",
-			templateUrl:"app/src/statics/statics.html"
-		})
+		// .state('statics',{
+		// 	url:"/statics",
+		// 	templateUrl:"app/src/statics/statics.html"
+		// })
 		$urlRouterProvider.otherwise('/login')
 	}
 })()

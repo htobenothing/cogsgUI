@@ -2,10 +2,15 @@ table{
 	margin:10px 0 0;
 }
 
+
 table input[type='checkbox'] {
     zoom: 2
 }
 
-/*
-#entriestable {width: 100%;border-spacing: 0px;margin:0;}
-#entriestable thead.fixed {position:fixed;top:0;}*/
+#header-fixed { 
+    position: fixed; 
+    top: 0px; 
+    display:none;
+    margin: 0;
+    background-color:white;
+}
