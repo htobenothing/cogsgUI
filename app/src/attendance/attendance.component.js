@@ -53,12 +53,10 @@
 
 	}
 
-	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window"]
+	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window","$timeout","$uibModal"]
 
-	function AttendController(AttendanceService, $log, MemberService, $window, $timeout) {
+	function AttendController(AttendanceService, $log, MemberService, $window, $timeout, $uibModal) {
 		var $ctrl = this;
-
-
 
 
 		$ctrl.confirmAttend = function (data) {
@@ -109,7 +107,7 @@
 					})
 			}
 
-			$log.log("All members:", $ctrl.members)
+			// $log.log("All members:", $ctrl.members)
 
 
 			// $log.info('Session',JSON.parse($window.sessionStorage.WeeklyAttends))
@@ -118,8 +116,6 @@
 
 
 		$ctrl.showDistrictAttendance = function () {
-
-
 			if (!$window.sessionStorage.WeeklyAttends) {
 				$log.info('New attendance ...')
 				var promise = MemberService.getAllActiveMembers();
@@ -143,19 +139,19 @@
 
 		}
 
-		$ctrl.showStatics = function () {
+		$ctrl.calculateStatistic = function(){
 			let members = $ctrl.members;
-			$ctrl.statics = {
-				Lords_Table: 0,
-				Prayer_Meeting: 0,
-				Morning_Revival: 0,
-				Bible_Reading: 0,
-				Small_Group: 0,
-				Children: 0
-			}
-			$ctrl.isShowStatic = true;
+			let statistic = {
+					Lords_Table: 0,
+					Prayer_Meeting: 0,
+					Morning_Revival: 0,
+					Bible_Reading: 0,
+					Small_Group: 0,
+					Children: 0
+				}
+				// $ctrl.isShowStatic = true;
 
-			$log.info("Calculating the statics...")
+			$log.info("Calculating the statistic...")
 			for (let i = 0; i < members.length; i++) {
 				let meetings = ["Lords_Table", "Morning_Revival", "Prayer_Meeting", "Small_Group", "Bible_Reading"]
 				let attend = members[i].newAttend;
@@ -165,7 +161,7 @@
 						// $log.info(attend[key])
 						if (meetings.indexOf(key) !== -1) {
 							if (attend[key]) {
-								$ctrl.statics[key]++;
+								statistic[key]++;
 							}
 						}
 
@@ -174,8 +170,43 @@
 
 				}
 			}
-			$ctrl.statics.Children = $ctrl.Children
-			$log.info($ctrl.statics)
+			if(!$ctrl.Children){
+				statistic.Children =0;
+			}else{
+				statistic.Children = $ctrl.Children;
+			}
+			
+			return statistic;
+		}
+		$ctrl.showStatistic = function () {
+			let statistic = $ctrl.calculateStatistic();
+			$log.info(statistic)
+			var modalInstance = $uibModal.open({
+				animation: true,
+				component: 'statisticmodalComponent',
+				resolve: {
+					statistic: function () {
+						return statistic;
+					}
+				}
+			});
+
+			modalInstance.result.then(function (data) {
+				console.log(data)
+					// var promise = MemberService.createNewMember(member)
+					// promise.then(function (resp) {
+					// 		$ctrl.getMemberList();
+					// 	})
+					// 	.catch(function (err) {
+					// 		console.log(err)
+					// 	})
+			}, function () {
+				console.log('modal-component dismissed at: ' + new Date());
+			});
+
+
+
+
 		}
 
 

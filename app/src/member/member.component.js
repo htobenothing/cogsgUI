@@ -34,7 +34,7 @@
 		}
 		service.getMemberDetail = function (id) {
 			var response = $http({
-				url: (ApiBasePath + "/api/members/"+id+"/"),
+				url: (ApiBasePath + "/api/members/" + id + "/"),
 				method: "GET",
 			})
 			return response;
@@ -101,16 +101,16 @@
 				}
 			})
 
-			modalInstance.result.then(function(member){
+			modalInstance.result.then(function (member) {
 				$log.warn("updating...")
 				var promise = MemberService.updateMember(member)
-				promise.then(function(resp){
-					$log.info("update successful ")
-					$ctrl.getMemberList();
-				})
-				.catch(function(error){
-					$log.info(error)
-				})
+				promise.then(function (resp) {
+						$log.info("update successful ")
+						$ctrl.getMemberList();
+					})
+					.catch(function (error) {
+						$log.info(error)
+					})
 			})
 		}
 
