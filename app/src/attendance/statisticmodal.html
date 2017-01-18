@@ -1,0 +1,41 @@
+<div>
+    <div id="statisticemail">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Statics Information</h3>
+            <h4>{{$ctrl.StartDay}} --- {{$ctrl.LordDay}}</h4>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <form>
+                <div class="form-group">
+                    <label>Lords Table:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Lords_Table" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Prayer Meeting:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Prayer_Meeting" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Morning Revival:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Morning_Revival" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Bible Reading:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Bible_Reading" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Small Group:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Small_Group" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Children:</label>
+                    <input type="text" ng-model="$ctrl.statistic.Children" class="form-control">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div></div>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Send Email</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</div>
