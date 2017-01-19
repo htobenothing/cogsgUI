@@ -32,10 +32,12 @@
 		};
 
 		$ctrl.ok = function () {
-			SendEmailService.sendEmail($ctrl.statistic);
-
+			// console.log($ctrl.statistic)
+			
+			
 			$ctrl.close({
 				$value: $ctrl.statistic
+
 			});
 		};
 

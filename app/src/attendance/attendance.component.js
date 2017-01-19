@@ -53,9 +53,9 @@
 
 	}
 
-	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window","$timeout","$uibModal"]
+	AttendController.$inject = ["AttendanceService", "$log", "MemberService", "$window","$timeout","$uibModal","SendEmailService"]
 
-	function AttendController(AttendanceService, $log, MemberService, $window, $timeout, $uibModal) {
+	function AttendController(AttendanceService, $log, MemberService, $window, $timeout, $uibModal,SendEmailService) {
 		var $ctrl = this;
 
 
@@ -192,14 +192,14 @@
 			});
 
 			modalInstance.result.then(function (data) {
-				console.log(data)
-					// var promise = MemberService.createNewMember(member)
-					// promise.then(function (resp) {
-					// 		$ctrl.getMemberList();
-					// 	})
-					// 	.catch(function (err) {
-					// 		console.log(err)
-					// 	})
+					console.log(data)
+					var promise = SendEmailService.sendEmail(data);
+					promise.then(function (resp) {
+							alert("email send Success")
+						})
+						.catch(function (err) {
+							alert("email fail")
+						})
 			}, function () {
 				console.log('modal-component dismissed at: ' + new Date());
 			});
