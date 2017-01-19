@@ -17,7 +17,7 @@
 
 		service.sendEmail = function (data) {
 			
-			$log.info("Sending email")
+			$log.info("Sending email",data)
 			var response = $http({
 				url: (ApiBasePath + "/api/email/office/"),
 				method: "POST",
